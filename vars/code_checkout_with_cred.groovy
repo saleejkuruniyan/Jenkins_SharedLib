@@ -6,8 +6,8 @@ def call(String GitUrl, String GitBranch, String GithubCredId){
             # Clone the repository using the configured credentials
             git clone ${GitUrl}
             
-            # Extract repo name from Git URL and enter the directory
-            cd \$(basename ${GitUrl} .git)
+            // # Extract repo name from Git URL and enter the directory
+            // cd \$(basename ${GitUrl} .git)
             
             # Checkout the required branch
             git checkout ${GitBranch}
