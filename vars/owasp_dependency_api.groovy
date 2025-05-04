@@ -12,7 +12,8 @@ def call(String apiKey, String cacheDir) {
             --format ALL \\
             --failOnCVSS 7 \\
             --disableAssembly \\
-            --enableExperimental
+            --enableExperimental \\
+            --disableNodeAudit
         """
         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
     }
