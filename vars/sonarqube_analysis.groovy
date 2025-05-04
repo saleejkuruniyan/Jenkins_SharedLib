@@ -4,8 +4,6 @@ def call(String SonarQubeAPI, String Projectname, String ProjectKey){
         $SONAR_HOME/bin/sonar-scanner \
           -Dsonar.projectName=${Projectname} \
           -Dsonar.projectKey=${ProjectKey} \
-          -Dsonar.javascript.exclusions=**/node_modules/** \
-          -Dsonar.typescript.exclusions=**/node_modules/** \
           -X
       """
   }
