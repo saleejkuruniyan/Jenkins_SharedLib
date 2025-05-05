@@ -7,5 +7,4 @@ def call(String RegistryURL, String ProjectName, String DockerfilePath, String R
                 --destination=${destination} \\
                 --skip-tls-verify
         """
-    }
 }
