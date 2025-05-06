@@ -6,10 +6,10 @@ def call(String registryPath, String registryCred, List<List<String>> builds, St
     )]) {
         def scriptLines = []
         
-        scriptLines << """
+        scriptLines << '''
         mkdir -p /kaniko/.docker
-        echo '{"auths":{"${registryUrl}":{"auth":"'$(echo -n "\$REGISTRY_USER:\$REGISTRY_PASS" | base64 -w0)'"}}}' > /kaniko/.docker/config.json
-        """
+        echo '{"auths":{"${registryUrl}":{"auth":"'$(echo -n "$REGISTRY_USER:$REGISTRY_PASS" | base64 -w0)'"}}}' > /kaniko/.docker/config.json
+        '''
 
         for (def args : builds) {
             String DockerfilePath = args[0]
