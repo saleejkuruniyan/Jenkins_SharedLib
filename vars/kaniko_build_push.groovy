@@ -1,4 +1,4 @@
-def kaniko_build_push(String RegistryURL, String ProjectName, List<List<String>> builds) {
+def call(String RegistryURL, String ProjectName, List<List<String>> builds) {
     def scriptLines = []
 
     for (def args : builds) {
