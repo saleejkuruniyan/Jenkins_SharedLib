@@ -5,6 +5,6 @@ def call(String RegistryURL, String ProjectName, String DockerfilePath, String R
                 --dockerfile=${DockerfilePath}/Dockerfile \\
                 --context=${WORKSPACE}/${DockerfilePath} \\
                 --destination=${destination} \\
-                --skip-tls-verify
+                --skip-tls-verify --cleanup
         """
 }
