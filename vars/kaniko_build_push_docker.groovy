@@ -1,11 +1,11 @@
-def call(String RegistryURL, String ProjectName, String dockerHubCred, List<List<String>> builds) {
+def call(String ProjectName, List<List<String>> builds, String dockerHubCred) {
     def scriptLines = []
 
     for (def args : builds) {
         String DockerfilePath = args[0]
         String RepoName = args[1]
         String ImageTag = args[2]
-        def destination = "${RegistryURL}/${ProjectName}/${RepoName}:${ImageTag}"
+        def destination = "${ProjectName}/${RepoName}:${ImageTag}"
 
         scriptLines << """
         echo "Building image for ${RepoName}:${ImageTag}..."
