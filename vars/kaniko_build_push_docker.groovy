@@ -1,22 +1,28 @@
 def call(String dockerHubCred, List<List<String>> builds) {
-    def scriptLines = []
-
-    withCredentials([usernamePassword(credentialsId: "${dockerHubCred}", passwordVariable: 'dockerhubpass', usernameVariable: 'dockerhubuser')]) {
+    withCredentials([usernamePassword(
+        credentialsId: dockerHubCred
+        usernameVariable: 'DOCKERHUB_USER',
+        passwordVariable: 'DOCKERHUB_PASS'
+    )]) {
+        def scriptLines = []
+        
+        scriptLines << "mkdir -p /kaniko/.docker"
+        
         for (def args : builds) {
             String DockerfilePath = args[0]
             String RepoName = args[1]
             String ImageTag = args[2]
-            def destination = "${dockerhubuser}/${RepoName}:${ImageTag}"
+            def destination = "${DOCKERHUB_USER}/${RepoName}:${ImageTag}"
 
             scriptLines << """
-            echo "Building and pushing image for ${RepoName}:${ImageTag}..."
+            echo "Building image for ${RepoName}:${ImageTag}..."
             /kaniko/executor \\
                 --dockerfile=${DockerfilePath}/Dockerfile \\
                 --context=${WORKSPACE}/${DockerfilePath} \\
                 --destination=${destination} \\
-                --skip-tls-verify \\
-                --build-arg DOCKER_USERNAME=${dockerhubuser} \\
-                --build-arg DOCKER_PASSWORD=${dockerhubpass}
+                --username=\$DOCKERHUB_USER \\
+                --password=\$DOCKERHUB_PASS \\
+                --skip-tls-verify
             rm -rf /kaniko/0/*
             """
         }
