@@ -1,4 +1,4 @@
-def call(String registryPath, List<List<String>> builds) {
+def call(String RegistryPath, List<List<String>> builds) {
     def scriptLines = []
 
     for (def args : builds) {
