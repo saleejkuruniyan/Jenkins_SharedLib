@@ -1,6 +1,6 @@
 def call(String dockerHubCred, List<List<String>> builds) {
     withCredentials([usernamePassword(
-        credentialsId: dockerHubCred
+        credentialsId: "${dockerHubCred}",
         usernameVariable: 'DOCKERHUB_USER',
         passwordVariable: 'DOCKERHUB_PASS'
     )]) {
