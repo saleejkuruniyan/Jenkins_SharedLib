@@ -8,6 +8,7 @@ def call(String RegistryPath, List<List<String>> builds) {
 
         sh """
             echo "Building image for ${RepoName}:${ImageTag}..."
+            echo "Running in: \$(pwd)"
             /kaniko/executor \\
                 --dockerfile=${DockerfilePath}/Dockerfile \\
                 --context=\$(pwd)/${DockerfilePath} \\
