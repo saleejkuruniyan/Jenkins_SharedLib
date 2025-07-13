@@ -11,7 +11,7 @@ def call(String RegistryPath, List<List<String>> builds) {
         echo "Building image for ${RepoName}:${ImageTag}..."
         /kaniko/executor \\
             --dockerfile=${DockerfilePath}/Dockerfile \\
-            --context=${WORKSPACE}/${DockerfilePath} \\
+            --context=\$(pwd)/${DockerfilePath} \\
             --destination=${destination} \\
             --skip-tls-verify
         rm -rf /kaniko/0/*
