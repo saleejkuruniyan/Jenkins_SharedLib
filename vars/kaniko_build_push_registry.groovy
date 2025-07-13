@@ -16,6 +16,8 @@ def call(String RegistryPath, List<List<String>> builds) {
                 --dockerfile=${dir}/Dockerfile \\
                 --context=\$(pwd)/${dir} \\
                 --destination=${dest} \\
+                --cache=true \\
+                --cache-dir=/cache \\
                 --skip-tls-verify
             rm -rf /kaniko/0/*
         """
