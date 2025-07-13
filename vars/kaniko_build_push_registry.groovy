@@ -1,18 +1,21 @@
 def call(String RegistryPath, List<List<String>> builds) {
     for (def args : builds) {
-        String DockerfilePath = args[0]   // e.g., "backend"
-        String RepoName = args[1]         // e.g., "wanderlust-backend-beta"
-        String ImageTag = args[2]         // e.g., "1.0"
-
-        def destination = "${RegistryPath}/${RepoName}:${ImageTag}"
+        String dir = args[0]
+        String repo = args[1]
+        String tag = args[2]
+        def dest = "${RegistryPath}/${repo}:${tag}"
 
         sh """
-            echo "Building image for ${RepoName}:${ImageTag}..."
-            echo "Running in: \$(pwd)"
+            echo "---- DEBUG: Working directory: \$(pwd)"
+            echo "---- DEBUG: Dockerfile path: ${dir}/Dockerfile"
+            echo "---- DEBUG: Context path: \$(pwd)/${dir}"
+            echo "---- DEBUG: Full Kaniko call:"
+            echo "/kaniko/executor --dockerfile=${dir}/Dockerfile --context=\$(pwd)/${dir} --destination=${dest} --skip-tls-verify"
+            
             /kaniko/executor \\
-                --dockerfile=${DockerfilePath}/Dockerfile \\
-                --context=\$(pwd)/${DockerfilePath} \\
-                --destination=${destination} \\
+                --dockerfile=${dir}/Dockerfile \\
+                --context=\$(pwd)/${dir} \\
+                --destination=${dest} \\
                 --skip-tls-verify
             rm -rf /kaniko/0/*
         """
