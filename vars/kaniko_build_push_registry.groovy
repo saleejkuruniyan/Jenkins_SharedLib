@@ -18,7 +18,10 @@ def call(String RegistryPath, List<List<String>> builds) {
                 --destination=${dest} \\
                 --cache=true \\
                 --cache-dir=/cache \\
-                --skip-tls-verify
+                --skip-tls-verify \\
+                --build-arg http_proxy=$http_proxy \\
+                --build-arg https_proxy=$https_proxy \\
+                --build-arg no_proxy=$no_proxy \\
             rm -rf /kaniko/0/*
         """
     }
