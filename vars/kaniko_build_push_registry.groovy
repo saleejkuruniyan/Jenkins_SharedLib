@@ -8,13 +8,13 @@ def call(String RegistryPath, List<List<String>> builds) {
 
         sh """
             echo "---- DEBUG: Working directory: \$(pwd)"
-            echo "---- DEBUG: Dockerfile path: ${dir}/Dockerfile"
+            echo "---- DEBUG: Dockerfile path: ${dir}/${dockerfile}"
             echo "---- DEBUG: Context path: \$(pwd)/${dir}"
             echo "---- DEBUG: Full Kaniko call:"
-            echo "/kaniko/executor --dockerfile=${dir}/Dockerfile --context=\$(pwd)/${dir} --destination=${dest} --skip-tls-verify"
-            
+            echo "/kaniko/executor --dockerfile=${dir}/${dockerfile} --context=\$(pwd)/${dir} --destination=${dest} --skip-tls-verify"
+
             /kaniko/executor \\
-                --dockerfile=${dir}/Dockerfile \\
+                --dockerfile=${dir}/${dockerfile} \\
                 --context=\$(pwd)/${dir} \\
                 --destination=${dest} \\
                 --cache=true \\
