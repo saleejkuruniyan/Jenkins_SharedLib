@@ -3,6 +3,7 @@ def call(String RegistryPath, List<List<String>> builds) {
         String dir = args[0]
         String repo = args[1]
         String tag = args[2]
+        String dockerfile = (args.size() > 3 && args[3]) ? args[3] : 'Dockerfile'
         def dest = "${RegistryPath}/${repo}:${tag}"
 
         sh """
